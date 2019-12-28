@@ -25,7 +25,7 @@ import com.alibaba.druid.stat.JdbcDataSourceStat;
 /**
  * @author wenshao [szujobs@hotmail.com]
  */
-public interface DataSourceProxy {
+public interface DataSourceProxy {//数据源代理接口
 
     JdbcDataSourceStat getDataSourceStat();
 

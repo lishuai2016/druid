@@ -144,8 +144,8 @@ public class FilterChainImpl implements FilterChain {
         return wrapper.unwrap(iface);
     }
 
-    public ConnectionProxy connection_connect(Properties info) throws SQLException {
-        if (this.pos < filterSize) {
+    public ConnectionProxy connection_connect(Properties info) throws SQLException {//创建一个物理连接的一个代理连接
+        if (this.pos < filterSize) {//保证最后一个filter处理过了
             return nextFilter()
                     .connection_connect(this, info);
         }
@@ -153,12 +153,12 @@ public class FilterChainImpl implements FilterChain {
         Driver driver = dataSource.getRawDriver();
         String url = dataSource.getRawJdbcUrl();
 
-        Connection nativeConnection = driver.connect(url, info);
+        Connection nativeConnection = driver.connect(url, info);//创建物理连接
 
         if (nativeConnection == null) {
             return null;
         }
-
+        //最后生成一个经过filter包裹后的代理连接
         return new ConnectionProxyImpl(dataSource, nativeConnection, info, dataSource.createConnectionId());
     }
 
@@ -4998,7 +4998,7 @@ public class FilterChainImpl implements FilterChain {
     }
 
     @Override
-    public DruidPooledConnection dataSource_connect(DruidDataSource dataSource, long maxWaitMillis) throws SQLException {
+    public DruidPooledConnection dataSource_connect(DruidDataSource dataSource, long maxWaitMillis) throws SQLException {//通过数据源来直接获取链接
         if (this.pos < filterSize) {
             DruidPooledConnection conn = nextFilter().dataSource_getConnection(this, dataSource, maxWaitMillis);
             return conn;

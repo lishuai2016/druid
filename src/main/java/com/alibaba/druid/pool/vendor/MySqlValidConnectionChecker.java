@@ -33,7 +33,7 @@ import com.alibaba.druid.support.logging.LogFactory;
 import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.Utils;
 
-public class MySqlValidConnectionChecker extends ValidConnectionCheckerAdapter implements ValidConnectionChecker, Serializable {
+public class MySqlValidConnectionChecker extends ValidConnectionCheckerAdapter implements ValidConnectionChecker, Serializable {//每个类型的数据库都包含一个
 
     public static final int DEFAULT_VALIDATION_QUERY_TIMEOUT = 1;
     public static final String DEFAULT_VALIDATION_QUERY = "SELECT 1";
@@ -52,7 +52,7 @@ public class MySqlValidConnectionChecker extends ValidConnectionCheckerAdapter i
                 clazz = Utils.loadClass("com.mysql.cj.jdbc.ConnectionImpl");
             }
 
-            if (clazz != null) {
+            if (clazz != null) {//void pingInternal(boolean var1, int var2) throws SQLException;
                 ping = clazz.getMethod("pingInternal", boolean.class, int.class);
             }
 

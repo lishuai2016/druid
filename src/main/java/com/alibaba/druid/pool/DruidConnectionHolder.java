@@ -46,13 +46,13 @@ public final class DruidConnectionHolder {
 
     protected final DruidAbstractDataSource       dataSource;
     protected final long                          connectionId;
-    protected final Connection                    conn;
+    protected final Connection                    conn;//物理连接
     protected final List<ConnectionEventListener> connectionEventListeners = new CopyOnWriteArrayList<ConnectionEventListener>();
     protected final List<StatementEventListener>  statementEventListeners  = new CopyOnWriteArrayList<StatementEventListener>();
     protected final long                          connectTimeMillis;
     protected volatile long                       lastActiveTimeMillis;
     protected volatile long                       lastValidTimeMillis;
-    private long                                  useCount                 = 0;
+    private long                                  useCount                 = 0;//使用次数统计
     private long                                  keepAliveCheckCount      = 0;
     private long                                  lastNotEmptyWaitNanos;
     private final long                            createNanoSpan;
@@ -88,7 +88,7 @@ public final class DruidConnectionHolder {
                                  Map<String, Object> variables, Map<String, Object> globleVariables)
                                                                                                     throws SQLException{
         this.dataSource = dataSource;
-        this.conn = conn;
+        this.conn = conn;//物理连接
         this.createNanoSpan = connectNanoSpan;
         this.variables = variables;
         this.globleVariables = globleVariables;
@@ -98,7 +98,7 @@ public final class DruidConnectionHolder {
 
         this.underlyingAutoCommit = conn.getAutoCommit();
 
-        if (conn instanceof WrapperProxy) {
+        if (conn instanceof WrapperProxy) {//链接编号
             this.connectionId = ((WrapperProxy) conn).getId();
         } else {
             this.connectionId = dataSource.createConnectionId();

@@ -24,7 +24,7 @@ import java.util.Properties;
  */
 public interface ConnectionProxy extends Connection, WrapperProxy {
 
-    Connection getRawObject();
+    Connection getRawObject();//返回原始代理对象
 
     Properties getProperties();
 
@@ -33,6 +33,6 @@ public interface ConnectionProxy extends Connection, WrapperProxy {
     Date getConnectedTime();
 
     TransactionInfo getTransactionInfo();
-    
+
     int getCloseCount();
 }

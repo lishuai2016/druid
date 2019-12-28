@@ -25,9 +25,9 @@ import java.sql.DriverManager;
 public class TestMySqlPing extends TestCase {
 
     public void test_ping() throws Exception {
-        String url = "jdbc:mysql://a.b.c.d:3308/dragoon_v25_masterdb";
-        String user = "dragoon_admin";
-        String password = "dragoon_root";
+        String url = "jdbc:mysql://127.0.0.1:3306/test";
+        String user = "root";
+        String password = "123456";
 
         Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
 
@@ -38,7 +38,7 @@ public class TestMySqlPing extends TestCase {
 
     public void ping(Connection conn) throws Exception {
         System.out.println(conn.getClass());
-        Method method = conn.getClass().getMethod("pring");
+        Method method = conn.getClass().getMethod("ping");
         method.invoke(conn);
     }
 }

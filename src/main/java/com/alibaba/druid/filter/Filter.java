@@ -59,7 +59,7 @@ import java.util.concurrent.Executor;
 /**
  * @author wenshao [szujobs@hotmail.com]
  */
-public interface Filter extends Wrapper {
+public interface Filter extends Wrapper {//自定义的拦截器,Wrapper含义？
 
     void init(DataSourceProxy dataSource);
 

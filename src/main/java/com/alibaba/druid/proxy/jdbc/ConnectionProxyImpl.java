@@ -42,7 +42,7 @@ import java.util.concurrent.Executor;
 /**
  * @author wenshao [szujobs@hotmail.com]
  */
-public class ConnectionProxyImpl extends WrapperProxyImpl implements ConnectionProxy {
+public class ConnectionProxyImpl extends WrapperProxyImpl implements ConnectionProxy {//ConnectionProxy的唯一实现
 
     private final Connection      connection;
 
@@ -89,7 +89,7 @@ public class ConnectionProxyImpl extends WrapperProxyImpl implements ConnectionP
     public FilterChainImpl createChain() {
         FilterChainImpl chain = this.filterChain;
         if (chain == null) {
-            chain = new FilterChainImpl(dataSource);
+            chain = new FilterChainImpl(dataSource);//根据数据源来创建过滤链
         } else {
             this.filterChain = null;
         }
